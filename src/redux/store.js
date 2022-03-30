@@ -1,6 +1,11 @@
 import { createStore } from "redux";
 import rootReducer from "./reducer";
 
-const store = createStore(rootReducer);
+import { composeWithDevTools } from "redux-devtools-extension";
+const composedEnhancers = composeWithDevTools();
+// rootReducer: reducer quản lý các thay đổi của state thông qua hành động
+// initValue: giá trị khởi tạo của store
+// enhancers: là một middleware như redux saga, ...
+const store = createStore(rootReducer, composedEnhancers);
 
 export default store;

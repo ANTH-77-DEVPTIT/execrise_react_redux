@@ -1,32 +1,38 @@
-const initState  ={
-    filters: {
-        search: "",
-        status: "All",
-        priority: [], //high, medium, low
-    },
+const initState = {
+  todoList: [
+    { id: 1, name: "Learn java", completed: false, priority: "Medium" },
+    { id: 2, name: "Learn Redux", completed: true, priority: "High" },
+    { id: 3, name: "Learn react native", completed: false, priority: "Low" },
+  ],
 
-    todoList: [
-        {id: 1, name: "Learn Yoga", completed: false, priority: "Medium"},
-        {id: 2, name: "Learn React redux", completed: true, priority: "High"},
-        {id: 3, name: "Learn React Native", completed: false, priority: "Low"},
-    ]
-}
+  filters: {
+    search: "",
+    status: "All",
+    priority: [],
+  },
+};
 
 const rootReducer = (state = initState, action) => {
-    switch (action.type) {
-        case "todoList/addTodo":
-            return {
-                ...state,
-                todoList: [
-                    ...state.todoList,
-                    {id: 1, name: "Learn Yoga", completed: false, priority: "Medium"}
-                ]
+  switch (action.type) {
+    case "todoList/addTodo":
+      return {
+        ...state,
+        todoList: [...state.todoList, action.payload],
+      };
+
+    case "filters/searchText":
+        return {
+            ...state,
+            filters: {
+                ...state.filters.search,
+                search: action.payload
             }
-            break;
+        }
     
-        default:
-            break;
-    }
-}
+
+    default:
+      return state;
+  }
+};
 
 export default rootReducer;
